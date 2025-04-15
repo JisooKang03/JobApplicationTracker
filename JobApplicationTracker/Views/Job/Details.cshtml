@@ -1,0 +1,19 @@
+﻿@model JobApplicationTracker.Models.Job
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+<h2>@Model.Title</h2>
+
+<p><strong>Company:</strong> @Model.Company</p>
+<p><strong>Location:</strong> @Model.Location</p>
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Salary:</strong> @Model.Salary.ToString("C")</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Applications" asp-action="Apply" method="post">
+        <input type="hidden" name="jobId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Apply Now</button>
+    </form>
+}

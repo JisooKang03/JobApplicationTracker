@@ -1,0 +1,56 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    var jobCount = ViewBag.JobCount ?? 0;
+    var appCount = ViewBag.AppCount ?? 0;
+    var userCount = ViewBag.UserCount ?? 0;
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Welcome, @User.Identity.Name! 🎯</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center mb-4">
+                        <div class="col-md-4">
+                            <div class="alert alert-primary rounded shadow-sm">
+                                <h4>@jobCount</h4>
+                                <p>Total Jobs</p>
+                                <a class="btn btn-outline-primary w-100" href="@Url.Action("Jobs", "Admin")">
+                                    Manage Jobs
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="alert alert-info rounded shadow-sm">
+                                <h4>@appCount</h4>
+                                <p>Total Applications</p>
+                                <a class="btn btn-outline-info w-100" href="@Url.Action("AllApplications", "Applications")">
+                                    View Applications
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="alert alert-warning rounded shadow-sm">
+                                <h4>@userCount</h4>
+                                <p>Total Users</p>
+                                <a class="btn btn-outline-warning w-100" href="@Url.Action("Users", "Admin")">
+                                    Manage Users
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a class="btn btn-secondary" href="@Url.Action("Index", "Home")">
+                            🏠 Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

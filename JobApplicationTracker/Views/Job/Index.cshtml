@@ -1,0 +1,68 @@
+﻿@model IEnumerable<JobApplicationTracker.Models.Job>
+@{
+    ViewData["Title"] = "Available Jobs";
+}
+
+<h2 class="text-center mb-4">Available Jobs</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info text-center">@TempData["Message"]</div>
+}
+
+<table class="table table-hover shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var job in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@job.Id" class="text-decoration-none">
+                        @job.Title
+                    </a>
+                </td>
+                <td>@job.Company</td>
+                <td>@job.Location</td>
+                <td>@job.Salary.ToString("C")</td>
+                <td>
+                    <div class="d-flex gap-2 flex-wrap">
+
+                        @* Apply Button for JobSeekers *@
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("JobSeeker"))
+                        {
+                            <form asp-controller="Applications" asp-action="Apply" method="post" class="d-inline">
+                                <input type="hidden" name="jobId" value="@job.Id" />
+                                <button type="submit" class="btn btn-primary btn-sm">Apply Now</button>
+                            </form>
+                        }
+
+                        @* Edit/Delete for Admin or Employer *@
+                        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Employer")))
+                        {
+                            <a asp-action="Edit" asp-route-id="@job.Id" class="btn btn-warning btn-sm">Edit</a>
+
+                            <form asp-action="Delete" asp-route-id="@job.Id" method="post" class="d-inline"
+                                  onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center mt-4">
+    <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary">
+        ← Back to Dashboard
+    </a>
+</div>

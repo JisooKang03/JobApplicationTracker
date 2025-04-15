@@ -1,0 +1,59 @@
+﻿@model IEnumerable<JobApplicationTracker.Models.Job>
+
+@{
+    ViewData["Title"] = "Manage Jobs";
+}
+
+<!-- ✅ Job Posted Notification (TempData) -->
+@if (TempData["JobCreated"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        @TempData["JobCreated"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<h2 class="text-center mb-4">All Posted Jobs</h2>
+
+<div class="d-flex justify-content-between mb-3">
+    <a asp-controller="Job" asp-action="Create" class="btn btn-success">
+        ➕ Add New Job
+    </a>
+    <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-dark">
+        🔙 Back to Dashboard
+    </a>
+</div>
+
+<table class="table table-bordered text-center">
+    <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="4" class="text-muted">No jobs have been posted yet.</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.Title</td>
+                    <td>@job.Company</td>
+                    <td>@job.Location</td>
+                    <td>
+                        <a asp-controller="Job" asp-action="Edit" asp-route-id="@job.Id" class="btn btn-sm btn-outline-primary me-1">✏️ Edit</a>
+                        <a asp-controller="Job" asp-action="Delete" asp-route-id="@job.Id" class="btn btn-sm btn-outline-danger">🗑️ Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

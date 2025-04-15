@@ -1,0 +1,42 @@
+﻿@model IEnumerable<JobApplicationTracker.Models.Application>
+
+<h2>📋 All Job Applications</h2>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Job Title</th>
+            <th>Applicant</th>
+            <th>Status</th>
+            <th>Resume</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var app in Model)
+        {
+            <tr>
+                <td>@app.Job?.Title</td>
+                <td>@app.User?.Email</td>
+                <td>
+                    <span class="badge
+                        @(app.Status == ApplicationStatus.Pending ? "bg-warning text-dark" :
+                          app.Status == ApplicationStatus.Interview ? "bg-info text-dark" :
+                          app.Status == ApplicationStatus.Hired ? "bg-success" :
+                          "bg-danger")">
+                        @app.Status
+                    </span>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(app.ResumePath))
+                    {
+                        <a href="@app.ResumePath" target="_blank" class="btn btn-sm btn-outline-primary">📄 View</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No resume</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

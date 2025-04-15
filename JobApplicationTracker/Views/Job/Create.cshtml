@@ -1,0 +1,64 @@
+﻿@model JobApplicationTracker.Models.Job
+@{
+    ViewData["Title"] = "Post a New Job";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-success text-white">
+                    <h3>➕ Post a New Job</h3>
+                </div>
+                <div class="card-body">
+                    <!-- ✅ Enable client-side validation -->
+                    <form asp-action="Create" method="post" novalidate>
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Company" class="form-label"></label>
+                            <input asp-for="Company" class="form-control" />
+                            <span asp-validation-for="Company" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Salary" class="form-label"></label>
+                            <!-- ✅ Force numeric input with minimum -->
+                            <input asp-for="Salary" class="form-control" type="number" step="0.01" min="0" />
+                            <span asp-validation-for="Salary" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">📤 Post Job</button>
+
+                        <div class="text-center mt-3">
+                            <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary">
+                                🔙 Back to Dashboard
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- ✅ Ensure jQuery + validation works -->
+    <partial name="_ValidationScriptsPartial" />
+}

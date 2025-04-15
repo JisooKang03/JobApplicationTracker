@@ -1,0 +1,61 @@
+﻿@model IEnumerable<JobApplicationTracker.Models.Application>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<h2>📄 My Applications</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-bordered table-hover mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Resume</th>
+                @* <th>Applied On</th> <!-- Uncomment if you later add a CreatedAt property --> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in Model)
+            {
+                <tr>
+                    <td>@app.Job?.Title</td>
+                    <td>@app.Job?.Company</td>
+                    <td>@app.Job?.Location</td>
+                    <td>
+                        <span class="badge
+                            @(app.Status == ApplicationStatus.Pending ? "bg-warning text-dark" :
+                              app.Status == ApplicationStatus.Interview ? "bg-info text-dark" :
+                              app.Status == ApplicationStatus.Hired ? "bg-success" :
+                              "bg-danger")">
+                            @app.Status
+                        </span>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(app.ResumePath))
+                        {
+                            <a href="@app.ResumePath" target="_blank" class="btn btn-sm btn-outline-primary">
+                                📄 View Resume
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="text-muted">No resume uploaded</span>
+                        }
+                    </td>
+                    @* <td>@app.CreatedAt.ToString("MMM dd, yyyy")</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info mt-3">
+        You haven't applied to any jobs yet.
+    </div>
+}

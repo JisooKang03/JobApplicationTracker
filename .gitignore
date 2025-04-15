@@ -1,0 +1,65 @@
+## Build artifacts
+bin/
+obj/
+out/
+.vs/
+## User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider / VSCode / JetBrains
+.idea/
+.vscode/
+*.code-workspace
+
+## Config files (optional)
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+
+## Entity Framework migrations
+Migrations/
+
+## ASP.NET Publish
+wwwroot/dist/
+publish/
+*.Publish.xml
+
+## Logs and diagnostic results
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+*.orig
+
+## System files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+## Backup files
+*.bak
+*.tmp
+*.old
+
+## NPM and package-related (if using front-end tooling)
+node_modules/
+package-lock.json
+npm-debug.log
+
+## NuGet packages
+*.nupkg
+packages/
+
+## Other
+_ReSharper*/
+*.Cache
+*.dbmdl
+*.dbschema
+*.pdb
+*.cache
+*.mdb
+*.bak
