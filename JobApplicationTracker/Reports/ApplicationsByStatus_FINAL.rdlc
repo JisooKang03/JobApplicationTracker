@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition"
+        xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources>
+    <DataSource Name="AppDataSource">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:DataSourceID>f6f4c4ea-e30c-4c56-9f6b-1f7d7b36222c</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="AppDataSet">
+      <Fields>
+        <Field Name="JobTitle">
+          <DataField>JobTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ApplicantEmail">
+          <DataField>ApplicantEmail</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateApplied">
+          <DataField>DateApplied</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>AppDataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn><Width>2in</Width></TablixColumn>
+            <TablixColumn><Width>1.5in</Width></TablixColumn>
+            <TablixColumn><Width>2.5in</Width></TablixColumn>
+            <TablixColumn><Width>2in</Width></TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="JobTitleHeader"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Job Title</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="StatusHeader"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Status</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="ApplicantHeader"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Applicant Email</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="DateHeader"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>Date Applied</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.25in</Height>
+              <TablixCells>
+                <TablixCell><CellContents><Textbox Name="JobTitle"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!JobTitle.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="Status"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Status.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="ApplicantEmail"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ApplicantEmail.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+                <TablixCell><CellContents><Textbox Name="DateApplied"><CanGrow>true</CanGrow><KeepTogether>true</KeepTogether><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!DateApplied.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style /></Textbox></CellContents></TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <DataSetName>AppDataSet</DataSetName>
+        <Top>0.25in</Top>
+        <Left>0.25in</Left>
+        <Height>0.5in</Height>
+        <Width>8in</Width>
+        <Style />
+      </Tablix>
+    </ReportItems>
+    <Height>2in</Height>
+  </Body>
+  <Width>8in</Width>
+  <Page>
+    <PageHeight>11in</PageHeight>
+    <PageWidth>8.5in</PageWidth>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+  </Page>
+</Report>
