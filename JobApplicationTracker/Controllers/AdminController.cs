@@ -11,9 +11,9 @@ namespace JobApplicationTracker.Controllers
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager; // ✅ Add this
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AdminController(ApplicationDbContext context, UserManager<ApplicationUser> userManager) // ✅ Inject it here
+        public AdminController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -45,14 +45,13 @@ namespace JobApplicationTracker.Controllers
         }
 
 
-        // GET: Admin/EditUser/{id}
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
                 return NotFound();
 
-            return View(user); // Make sure to create Views/Admin/EditUser.cshtml
+            return View(user);
         }
 
         [HttpPost]
@@ -77,8 +76,6 @@ namespace JobApplicationTracker.Controllers
             return View(model);
         }
 
-
-        // POST: Admin/DeleteUser/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteUser(string id)
@@ -104,7 +101,7 @@ namespace JobApplicationTracker.Controllers
             {
                 _context.Jobs.Add(job);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Jobs"); // Or wherever you want to go after posting
+                return RedirectToAction("Jobs");
             }
 
             return View(job);
