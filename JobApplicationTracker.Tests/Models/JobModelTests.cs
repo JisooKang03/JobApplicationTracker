@@ -1,4 +1,10 @@
-﻿using Xunit;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Robert Orazu
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+
+using Xunit;
 using JobApplicationTracker.Models;
 using System;
 using System.Linq;
