@@ -1,6 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using JobApplicationTracker.Data;
 using JobApplicationTracker.Models;
+/**
+ 
+Application Name: Job Application Tracker
+Author: Rashed Albatayneh
+Instructor: [mahboob Ali]**/
+
+
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Linq;
