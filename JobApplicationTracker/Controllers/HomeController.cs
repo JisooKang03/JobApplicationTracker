@@ -1,4 +1,9 @@
-﻿using System.Diagnostics;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Ji-Soo Kang
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+using System.Diagnostics;
 using JobApplicationTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

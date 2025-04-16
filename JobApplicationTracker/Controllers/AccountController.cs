@@ -1,4 +1,9 @@
-﻿using JobApplicationTracker.Models;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Ji-Soo Kang
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+using JobApplicationTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

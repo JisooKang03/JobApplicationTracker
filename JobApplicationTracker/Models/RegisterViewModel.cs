@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Ji-Soo Kang
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+using System.ComponentModel.DataAnnotations;
 
 namespace JobApplicationTracker.Models
 {
