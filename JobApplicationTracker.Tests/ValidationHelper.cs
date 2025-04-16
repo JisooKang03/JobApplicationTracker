@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Robert Orazu
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 public static class ValidationHelper

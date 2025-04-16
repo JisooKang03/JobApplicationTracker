@@ -1,4 +1,10 @@
-﻿using Xunit;
+﻿/******************************************************************************
+ * Application Name: Job Application Tracker
+ * Author: Robert Orazu
+ * Instructor: Mahboob Ali
+ ******************************************************************************/
+
+using Xunit;
 using Moq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
