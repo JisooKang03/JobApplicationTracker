@@ -1,0 +1,58 @@
+@startuml
+title Admin Dashboard Load
+
+actor Admin
+participant "AdminController" as Controller
+participant "ApplicationDbContext" as Db
+
+Admin -> Controller: GET /Admin/Dashboard
+Controller -> Db: Jobs.ToListAsync()
+Db --> Controller: List<Job>
+Controller -> Db: Applications.ToListAsync()
+Db --> Controller: List<Application>
+Controller -> Db: Users.ToListAsync()
+Db --> Controller: List<User>
+
+Controller -> View: Return Dashboard view with counts
+@enduml
+
+@startuml
+title Admin Edits User
+
+actor Admin
+participant "AdminController" as Controller
+participant "UserManager" as UM
+
+Admin -> Controller: POST /Admin/EditUser with updated user
+Controller -> UM: FindByIdAsync(model.Id)
+alt User found
+    Controller -> UM: UpdateAsync(user)
+    alt Update Succeeded
+        Controller -> Admin: Redirect to Users view
+    else Update Failed
+        loop result.Errors
+            Controller -> View: AddModelError
+        end
+        Controller -> Admin: Return View with Errors
+    end
+else User not found
+    Controller -> Admin: Return NotFound()
+end
+@enduml
+
+@startuml
+title Admin Creates a Job Posting
+
+actor Admin
+participant "AdminController" as Controller
+participant "ApplicationDbContext" as Db
+
+Admin -> Controller: POST /Admin/Create with Job
+alt ModelState.IsValid
+    Controller -> Db: Add(job)
+    Controller -> Db: SaveChangesAsync()
+    Controller -> Admin: Redirect to Jobs list
+else
+    Controller -> Admin: Return View with Job form (invalid)
+end
+@enduml

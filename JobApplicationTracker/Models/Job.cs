@@ -17,6 +17,7 @@ namespace JobApplicationTracker.Models
         public string Location { get; set; }
 
         [Required]
+        [Range(1, double.MaxValue, ErrorMessage = "Salary must be greater than 0.")]
         public decimal Salary { get; set; }
 
         [Required]

@@ -25,7 +25,6 @@ public class JobControllerTests
 
         _dbContext = new ApplicationDbContext(options);
 
-        // Seed test job
         _dbContext.Jobs.Add(new Job
         {
             Id = 1,
@@ -81,7 +80,6 @@ public class JobControllerTests
     [Fact]
     public async Task Create_Post_ValidModel_SavesAndRedirects()
     {
-        // Simulate logged-in user
         var user = new ClaimsPrincipal(new ClaimsIdentity(new[]
         {
             new Claim(ClaimTypes.Name, "admin@example.com")

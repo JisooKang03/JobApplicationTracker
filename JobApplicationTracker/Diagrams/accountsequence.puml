@@ -1,0 +1,105 @@
+' ========== Register (GET) ==========
+@startuml
+title Register Page (GET)
+actor User
+participant "AccountController" as Controller
+
+User -> Controller: GET /Account/Register
+Controller -> User: Return Register View
+@enduml
+
+
+' ========== Register (POST) ==========
+@startuml
+title Register Action (POST)
+actor User
+participant "AccountController" as Controller
+participant "UserManager" as UM
+participant "SignInManager" as SM
+
+User -> Controller: POST /Account/Register
+alt ModelState.IsValid
+    Controller -> UM: CreateAsync(user, password)
+    alt Create Succeeds
+        Controller -> UM: AddToRoleAsync(user, role)
+        Controller -> SM: SignInAsync(user)
+        alt Role == Admin
+            Controller -> User: Redirect to Admin Dashboard
+        else Role == Employer
+            Controller -> User: Redirect to Create Job
+        else
+            Controller -> User: Redirect to Job Index
+        end
+    else Create Fails
+        loop foreach error in result.Errors
+            Controller -> View: AddModelError
+        end
+        Controller -> User: Return View with Errors
+    end
+else Invalid ModelState
+    Controller -> User: Return View with Errors
+end
+@enduml
+
+
+' ========== Login (GET) ==========
+@startuml
+title Login Page (GET)
+actor User
+participant "AccountController" as Controller
+
+User -> Controller: GET /Account/Login
+Controller -> User: Return Login View
+@enduml
+
+
+' ========== Login (POST) ==========
+@startuml
+title Login Action (POST)
+actor User
+participant "AccountController" as Controller
+participant "UserManager" as UM
+participant "SignInManager" as SM
+
+User -> Controller: POST /Account/Login (email, password)
+Controller -> UM: FindByEmailAsync(email)
+alt user == null
+    Controller -> UM: FindByNameAsync(email)
+end
+
+alt user != null
+    Controller -> SM: PasswordSignInAsync(userName, password, rememberMe)
+    alt Login Success
+        Controller -> UM: IsInRoleAsync(user, "Admin")
+        alt Admin
+            Controller -> User: Redirect to Admin Dashboard
+        else
+            Controller -> UM: IsInRoleAsync(user, "Employer")
+            alt Employer
+                Controller -> User: Redirect to Create Job
+            else
+                Controller -> User: Redirect to Job Index
+            end
+        end
+    else Login Failed
+        Controller -> View: AddModelError("Invalid login")
+        Controller -> User: Return View
+    end
+else user == null
+    Controller -> View: AddModelError("Invalid login")
+    Controller -> User: Return View
+end
+@enduml
+
+
+' ========== Logout ==========
+@startuml
+title Logout Action
+actor User
+participant "AccountController" as Controller
+participant "SignInManager" as SM
+
+User -> Controller: POST /Account/Logout
+Controller -> SM: SignOutAsync()
+Controller -> User: Redirect to /Account/Login
+@enduml
